@@ -4,7 +4,10 @@
 using namespace std;
 
 /*********************************
+I didnt made function FindPointer myself, it is from some page, but i dont remember which one it was.
+I only changed it that, it can work on 64bit.
 
+How FindPointer works:
 Function find pointer is used to get value from multi-levels pointers.
 It return 4 byte value, which is addres to final value.
 Also array offset can take multiple offsets.
@@ -34,6 +37,10 @@ int FindPointer(int offset, HANDLE pHandle,long long int baseaddr, int offsets[]
    } 
    return Address; 
 }
+
+// if you dont like that kind of output you can change text there
+// also if you need aditional text there and you dont want add next call paramets
+// then just simple change text to return values :)
 
 int WriteToProcess(LPVOID valAddr, unsigned int nVal)
 {
