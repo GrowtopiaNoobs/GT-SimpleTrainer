@@ -11,6 +11,7 @@ HWND hWnd;
 
 int main(int argc, char** argv)
 {
+	system("COLOR 0A"); // ik, just bit unsecure, will fix it soon
 	SetConsoleTitle("Growtopia Trainer");
 	cout << "Welcome to Growtopia Trainer!" << endl;
 	hWnd = FindWindow(NULL, "Growtopia");
@@ -27,7 +28,8 @@ int main(int argc, char** argv)
 			_getch();
 			return 0;
 		} else {
-			//...
+			// here is possible to put code which we run if gt is oppened
+			// but i decided to put it after closing if, because then is code easier to read
 		}
 	}
 	bool hack1=false;
@@ -40,11 +42,11 @@ int main(int argc, char** argv)
 		{
 			if(!hack1)
 			{
-				WriteToProcess((LPVOID)0x140000000, 0x13371337);
+				WriteToProcess((LPVOID)0x140000000, 0x13371337); // actions to enable hack
 				hack1=true;
 				cout << "Hack 1 is on!" << endl;
 			} else {
-				WriteToProcess((LPVOID)0x140000000, 0x90909090);
+				WriteToProcess((LPVOID)0x140000000, 0x90909090); // actions to disable hack
 				hack1=false;
 				cout << "Hack 1 is off!" << endl;
 			}
@@ -53,16 +55,16 @@ int main(int argc, char** argv)
 		{
 			if(!hack2)
 			{
-				WriteToProcess((LPVOID)0x140000000, 0x13371337);
+				WriteToProcess((LPVOID)0x140000000, 0x13371337); // actions to enable hack
 				hack2=true;
 				cout << "Hack 2 is on!" << endl;
 			} else {
-				WriteToProcess((LPVOID)0x140000000, 0x90909090);
+				WriteToProcess((LPVOID)0x140000000, 0x90909090); // actions to disable hack
 				hack2=false;
 				cout << "Hack 2 is off!" << endl;
 			}
 		}
-		usleep(100000);
+		usleep(100000); // i think for this sleep is best time 100 miliseconds (100000 microseconds)
 	}
 	return 0;
 }
