@@ -11,7 +11,8 @@ HWND hWnd;
 
 int main(int argc, char** argv)
 {
-	system("COLOR 0A"); // ik, just bit unsecure, will fix it soon
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY); // here is color changed to green
 	SetConsoleTitle("Growtopia Trainer");
 	cout << "Welcome to Growtopia Trainer!" << endl;
 	hWnd = FindWindow(NULL, "Growtopia");
