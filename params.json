@@ -1,0 +1,6 @@
+{
+  "name": "Gt-simpletrainer",
+  "tagline": "Simple project to make your own GT trainer!",
+  "body": "# GT-SimpleTrainer\r\nSimple project to make your own GT trainer!\r\n\r\nThis project has been developed and tested on Dev-C++ 5.11: https://sourceforge.net/projects/orwelldevcpp/\r\nAlso this isn't ready to use trainer! You need to find opcodes, edit and then compile it yourself!\r\n\r\nThanks following people for reporting bugs or helping with development:\r\nAmateurz Gaming\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
