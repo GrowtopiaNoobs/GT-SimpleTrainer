@@ -6,9 +6,6 @@
 
 using namespace std;
 
-DWORD ProcessId;
-HWND hWnd;
-
 int main(int argc, char** argv)
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -23,7 +20,7 @@ int main(int argc, char** argv)
 		return 0;
 	} else {
 		GetWindowThreadProcessId(hWnd, &ProcessId);
-		HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, ProcessId);
+		hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, ProcessId);
 		if(!hProcess){
 			cout << "Eror while opening process!" << endl;
 			_getch();
