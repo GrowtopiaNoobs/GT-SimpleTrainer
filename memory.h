@@ -3,6 +3,10 @@
 
 using namespace std;
 
+DWORD ProcessId;
+HWND hWnd;
+HANDLE hProcess;
+
 /*********************************
 I didnt made function FindPointer myself, it is from some page, but i dont remember which one it was.
 I only changed it that, it can work on 64bit.
@@ -44,7 +48,7 @@ int FindPointer(int offset, HANDLE pHandle,long long int baseaddr, int offsets[]
 
 int WriteToProcess(LPVOID valAddr, unsigned int nVal)
 {
-	HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, false, GetCurrentProcessId());
+	HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, false, ProcessId);
     if(!hProc) {
 		cout << "Error while opening process!" << endl;
 	} else {
