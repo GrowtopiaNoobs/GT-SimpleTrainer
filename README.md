@@ -6,3 +6,6 @@ Also this isn't ready to use trainer! You need to find opcodes, edit and then co
 
 Thanks following people for reporting bugs or helping with development:
 Amateurz Gaming
+
+
+**Warnng: In newer versions of Growtopia C++ trainers don't work and currently noone know fix for that!**
