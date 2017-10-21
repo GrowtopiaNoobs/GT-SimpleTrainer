@@ -6,12 +6,74 @@
 
 using namespace std;
 
+BOOL SetPrivilege(
+	HANDLE hToken,          // access token handle
+	LPCTSTR lpszPrivilege,  // name of privilege to enable/disable
+	BOOL bEnablePrivilege   // to enable or disable privilege
+	)
+{
+	TOKEN_PRIVILEGES tp;
+	LUID luid;
+
+	if (!LookupPrivilegeValue(
+		NULL,            // lookup privilege on local system
+		lpszPrivilege,   // privilege to lookup 
+		&luid))        // receives LUID of privilege
+	{
+		dbgOut("LookupPrivilegeValue error: " + GetLastError());
+		return FALSE;
+	}
+
+	tp.PrivilegeCount = 1;
+	tp.Privileges[0].Luid = luid;
+	if (bEnablePrivilege)
+		tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+	else
+		tp.Privileges[0].Attributes = 0;
+
+	// Enable the privilege or disable all privileges.
+
+	if (!AdjustTokenPrivileges(
+		hToken,
+		FALSE,
+		&tp,
+		sizeof(TOKEN_PRIVILEGES),
+		(PTOKEN_PRIVILEGES)NULL,
+		(PDWORD)NULL))
+	{
+		dbgOut("AdjustTokenPrivileges error: " + GetLastError());
+		return FALSE;
+	}
+
+	if (GetLastError() == ERROR_NOT_ALL_ASSIGNED)
+
+	{
+		dbgOut("The token does not have the specified privilege.");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+BOOL EnableAdminPrivilege()
+{
+	dbgOut("Getting admin privilege...");
+	HANDLE currentProcessToken;
+	OpenProcessToken(GetCurrentProcess(), TOKEN_ALL_ACCESS, &currentProcessToken);
+	return SetPrivilege(currentProcessToken, TEXT("SeDebugPrivilege"), true);
+}
+
 int main(int argc, char** argv)
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY); // here is color changed to green
 	SetConsoleTitle("Growtopia Trainer");
 	cout << "Welcome to Growtopia Trainer!" << endl;
+	if(!EnableAdminPrivilege())
+	{
+		cout << "Please run as admin!" << endl;
+		_getch();
+	}
 	hWnd = FindWindow(NULL, "Growtopia");
 	if(!hWnd)
 	{
